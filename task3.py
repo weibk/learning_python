@@ -16,7 +16,8 @@ shop = [
 
 money = int(input("请输入你的金额："))
 # 优惠券
-ticket = random.randint(1, 100)
+ticket = random.randint(1, 10)
+print(f"恭喜您抽中了{ticket}元的优惠券")
 mycart = []
 print(f"序号---名称---价格")
 for index, value in enumerate(shop):
@@ -33,10 +34,12 @@ while True:
             result += item[1]
     if choose.isdigit():
         choose = int(choose)
-        if 0 < choose < len(shop):
-            if money-result > shop[choose - 1][1]:
+        if 0 < choose <= len(shop):
+            if money-result >= shop[choose - 1][1]:
                 mycart.append(shop[choose - 1])
                 print("加入购物车成功!!")
+            else:
+                print("您的资金不足，购物车已满，输入Q/q结账")
         else:
             print("商品不存在！！")
     elif choose == 'Q' or choose == 'q':
@@ -55,7 +58,7 @@ while True:
                     newcart.append([item[0], mycart.count(item)])
             for x in newcart:
                 print(x[0], "X", x[1])
-            print("您的余额为：", money - result - ticket, "元")
+            print("您的余额为：", money - result + ticket, "元")
             break
     else:
         print("输入非法！！")

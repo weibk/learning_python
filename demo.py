@@ -87,18 +87,18 @@
 #     i += 1
 
 # 九九乘法表
-i, j = 1, 1
-result = ' '
-while j <= 9:
-    while i <= j:
-        result += f"{i} * {j} = {i * j}\t"
-        i += 1
-        if i > j:
-            i = 1
-            print(result)
-            result = ' '
-            break
-    j += 1
+# i, j = 1, 1
+# result = ' '
+# while j <= 9:
+#     while i <= j:
+#         result += f"{i} * {j} = {i * j}\t"
+#         i += 1
+#         if i > j:
+#             i = 1
+#             print(result)
+#             result = ' '
+#             break
+#     j += 1
 
 # 倒序乘法表
 # i, j = 1, 9
@@ -167,9 +167,18 @@ while j <= 9:
 # for k, v in dict1.items():
 #     print(k, v)
 
+# 有下列列表，请编程实现列表的数据翻转（京东金融的测试开发笔试题）
+# List = [1,2,3,4,5,6,7,8,9]
+# 实现效果：list = [9,8,7,6,5,4,3,2,1]
 
-a = [[1, 2], [1, 2], [2, 3]]
-b = set(a)
-print(b)
-for x in b:
-    print(x)
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+a.reverse()
+print(a)
+
+# 请编程统计列表中的每个数字出现的次数(百度初级测试开发笔试题)
+# List = [1,4,7,5,8,2,1,3,4,5,9,7,6,1,10]
+
+b = [1, 4, 7, 5, 8, 2, 1, 3, 4, 5, 9, 7, 6, 1, 10]
+c = set(b)
+for x in c:
+    print(f"数字{x}出现了{b.count(x)}次")

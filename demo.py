@@ -87,18 +87,18 @@
 #     i += 1
 
 # 九九乘法表
-# i, j = 1, 1
-# result = ' '
-# while j <= 9:
-#     while i <= j:
-#         result += f"{i} * {j} = {i * j}\t"
-#         i += 1
-#         if i > j:
-#             i = 1
-#             print(result)
-#             result = ' '
-#             break
-#     j += 1
+i, j = 1, 1
+result = ' '
+while j <= 9:
+    while i <= j:
+        result += f"{i} * {j} = {i * j}\t"
+        i += 1
+        if i > j:
+            i = 1
+            print(result)
+            result = ' '
+            break
+    j += 1
 
 # 倒序乘法表
 # i, j = 1, 9

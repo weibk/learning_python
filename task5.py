@@ -42,15 +42,12 @@ bank_user = {
 }
 
 
+# 添加用户
 def useradd():
-    arr = []
-    for i in bank_user.keys():
-        arr.append(i)
-    if len(arr) == 100:
+    # 判断用户库是否已满
+    if len(bank_user) == 100:
         return 3
-    '''
-    判断用户是否存在
-    '''
+    # 判断用户是否存在
     while True:
         username = input("请输入您的姓名：")
         for item in bank_user.keys():
@@ -63,10 +60,7 @@ def useradd():
     province = input("\t请输入您所在的城市：")
     street = input("\t请输入您所在的街道：")
     house_number = input("\t请输入您的门牌号：")
-    '''
-    判断账号是否已经存在
-    如果已经存在则重新生成
-    '''
+    # 判断账号是否已经存在,如果已经存在则重新生成
     while True:
         account = str(random.randint(10, 99)) + str(
             random.randint(10, 99)) + str(
@@ -100,6 +94,7 @@ def useradd():
     return info1
 
 
+# 登录方法
 def login():
     while True:
         acc = input("请输入您的账号")
@@ -117,6 +112,7 @@ while True:
     step = input("请选择业务：")
     if step == "1":
         info = useradd()
+        # 如果开户成功，打印用户信息
         if isinstance(info, dict):
             if info['flag'] == 1:
                 profile = '''
@@ -147,6 +143,7 @@ while True:
         if isinstance(flag, dict):
             acc1 = flag['acc']
             print(f"登录成功!账户当前余额为{bank_user[acc1]['balance']}")
+            # 登录成功存款
             while True:
                 qukuan = int(input("请输入您要存的金额："))
                 bank_user[acc1]['balance'] += qukuan
@@ -163,11 +160,13 @@ while True:
         if isinstance(flag, dict):
             acc1 = flag['acc']
             print(f"登录成功!账户当前余额为{bank_user[acc1]['balance']}")
+            # 判断余额是否为0
             if bank_user[acc1]['balance'] == 0:
                 print("您的余额为0，不能使用取款业务")
                 continue
             while True:
                 qukuan = int(input("请输入您要取的金额："))
+                # 判断余额是否足够
                 if bank_user[acc1]['balance'] < qukuan:
                     print('您的余额不足')
                     break
@@ -186,20 +185,30 @@ while True:
         if isinstance(flag, dict):
             acc1 = flag['acc']
             print(f"登录成功!账户当前余额为{bank_user[acc1]['balance']}")
+            # 余额为0不能转账
             if bank_user[acc1]['balance'] == 0:
                 print("您的余额为0，不能使用转账业务")
                 continue
             while True:
                 acc2 = input("请输入您要转账的账户：")
+                # 判断转入账户是否存在
                 if acc2 in bank_user:
-                    zhuan = int(input("请输入您要转的金额："))
-                    if bank_user[acc1]['balance'] < zhuan:
-                        print("您的余额不足")
-                        break
+                    # 判断转出和转入账户是否相同
+                    if acc2 != acc1:
+                        zhuan = int(input("请输入您要转的金额："))
+                        # 判断余额
+                        if bank_user[acc1]['balance'] < zhuan:
+                            print("您的余额不足")
+                            break
+                        else:
+                            # 转出账户余额减少
+                            bank_user[acc1]['balance'] -= zhuan
+                            print(f"转账成功！您的余额为{bank_user[acc1]['balance']}")
+                            # 转入账户余额增加
+                            bank_user[acc2]['balance'] += zhuan
+                            break
                     else:
-                        bank_user[acc1]['balance'] -= zhuan
-                        bank_user[acc2]['balance'] += zhuan
-                        print(f"转账成功！您的余额为{bank_user[acc1]['balance']}")
+                        print('不能给自己转账')
                         break
                 else:
                     print("您输入的账号不存在")

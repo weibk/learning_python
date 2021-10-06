@@ -18,3 +18,5 @@ Python学习
 - renwu3.py：2021/09/23 任务3
 
 - renwu4.py：2021/09/24 任务4
+
+- bank.py: 2021/10/06 pymysql使用
